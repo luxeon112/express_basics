@@ -1,12 +1,14 @@
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-
-    <link  rel="stylesheet" href="/style.css">
-    <title>Hello page.</title>
-</head>
-<body>
-<h1>Hello, <%= username %>!</h1>
-</body>
-</html>
+    <h1>Questions about express</h1>
+          <% questions.forEach((question)=>{ %>
+           <% if(question['user'].toLowerCase()=== 'kadi'){%>
+    <h2> <%= question['title']%></h2>
+    <p> <%=question['user']%></p>
+        <p> <%=question['votes']%></p>
+        <% } else {%>
+        <h1>Asked by oher users:</h1>
+        <h2> <%= question['title']%></h2>
+        <p> <%=question['user']%></p>
+    <   p> <%=question['votes']%></p>
+    <% }%>
+    <% }); %>
+    ©

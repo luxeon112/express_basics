@@ -1,26 +1,33 @@
-
 const express = require('express');
+//require path
 const app = express();
-
+const path = require('path');
+const bodyParser = require('body-parser');
 //add public directiory
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended:true}));
+//add views directory path
+app.set('views', path.join(__dirname,'views'));
+//add views template engine
+app.set('view engine','ejs');
 
-app.get('/user/:username', (req, res) => {
-app.get('/', (req, res) => {
-    res.send('<a href="/contact">Contact Us</a> <br> <a href="/about">About Us</a>');
-});
-app.get('/contact', (req, res) => {
-    res.send('<h1>Contact Us Page</h1>');
-});
-app.get('/about', (req, res) => {
-    res.send('<h1>About Us Page</h1>');
-});app.get('*', (req, res) => {
-    res.send('404. This page does not exist.<a href="/">Go to home page</a>');
-    app.get('/user/:username', (req, res) => {
-        let user = req.params.username;
-        res.render('index.ejs',{username : user});
-    });
 
-    app.listen(3000, () => {
-        console.log(`Server started on http://localhost:3000`);
-    });
+app.get('/login', (req, res) => {
+
+    res.render('login');
+});
+
+app.post('/login', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    if(username === 'user' && password ==='qwerty'){
+        res.redirect('/dashboard');
+    }
+});
+app.get('/dashboard', (req, res) => {
+    res.render('dashboard');
+})
+
+app.listen(3000, () => {
+    console.log(`Server started on http://localhost:3000`);
+});
