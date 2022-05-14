@@ -1,3 +1,11 @@
+
+const express = require('express');
+const app = express();
+
+//add public directiory
+app.use(express.static('public'));
+
+app.get('/user/:username', (req, res) => {
 app.get('/', (req, res) => {
     res.send('<a href="/contact">Contact Us</a> <br> <a href="/about">About Us</a>');
 });
